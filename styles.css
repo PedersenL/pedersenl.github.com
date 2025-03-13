@@ -1,0 +1,367 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(-45deg, #2c3e50, #3498db, #2980b9, #1abc9c);
+    background-size: 400% 400%;
+    min-height: 100vh;
+    background-attachment: fixed;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header and Navigation */
+header {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 1rem 0;
+}
+
+nav ul li {
+    margin: 0 1.5rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #007bff;
+}
+
+/* Hero Section */
+#hero {
+    padding: 120px 0 60px;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+    border-radius: 0 0 20px 20px;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info i {
+    color: #007bff;
+}
+
+.contact-info a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #007bff;
+}
+
+.bio {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Sections */
+section {
+    padding: 60px 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+    border-radius: 20px;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+    font-size: 2rem;
+}
+
+/* Timeline */
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: rgba(248, 249, 250, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.timeline-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background-color: white;
+    padding: 5px;
+}
+
+.timeline-item img.logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background-color: white;
+    padding: 5px;
+}
+
+.timeline-item img.logo.mcdonalds {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background-color: white;
+    padding: 2px;
+}
+
+.timeline-item img.achievement {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    margin-left: auto;
+}
+
+.timeline-item img.kemiOL {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-left: auto;
+}
+
+.timeline-item-content {
+    flex-grow: 1;
+}
+
+.timeline-item h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.timeline-item .date {
+    color: #007bff;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.timeline-item .location {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.timeline-item ul {
+    list-style-position: inside;
+    margin-left: 20px;
+}
+
+.timeline-item .subsection {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.timeline-item .subsection h4 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.project-card {
+    background-color: rgba(248, 249, 250, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.project-card h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.project-card .date {
+    color: #007bff;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.project-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-top: auto;
+    text-align: center;
+}
+
+.project-link:hover {
+    background-color: #0056b3;
+}
+
+/* Contact Section */
+#contact {
+    text-align: center;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Footer */
+footer {
+    background-color: rgba(44, 62, 80, 0.9);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    nav ul li {
+        margin: 0;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .timeline-item img {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 15px;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timeline-item, .project-card {
+    animation: fadeIn 0.5s ease-out forwards;
+} 
