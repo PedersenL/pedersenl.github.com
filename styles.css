@@ -425,3 +425,27 @@ footer {
 .timeline-item, .project-card {
     animation: fadeIn 0.5s ease-out forwards;
 }
+
+.course-link {
+    display: inline-flex;
+    align-items: center;
+    color: #0B5394;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.course-link:hover {
+    color: #083b6f;
+}
+
+.course-link i {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.course-link:hover i {
+    transform: translateX(3px);
+}

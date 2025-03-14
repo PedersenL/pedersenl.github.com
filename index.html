@@ -6,20 +6,129 @@
     <title>Leif Pedersen - Personal Website</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Menu button styles */
+        .menu-button {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1100;
+            background-color: #0B5394;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+        }
+        
+        .menu-button:hover {
+            background-color: #083b6f;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: white;
+            z-index: 1050;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.open {
+            right: 0;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-menu ul li {
+            margin-bottom: 15px;
+        }
+        
+        .mobile-menu ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 8px 0;
+        }
+        
+        .mobile-menu ul li a:hover {
+            color: #0B5394;
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Adjust main content padding */
+        #hero {
+            padding-top: 40px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#extracurriculars">Extracurriculars</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Mobile menu button -->
+    <button class="menu-button" id="menuButton">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#extracurriculars">Extracurriculars</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
 
     <main>
         <section id="hero" class="about">
@@ -52,6 +161,7 @@
                                 <li>Focusing on courses in Quantum Information Sciences and Quantum computers</li>
                                 <li>Solid quantum information foundation from master courses such as Advanced Quantum Mechanics and Quantum Information</li>
                                 <li>Currently working on quantum computers with master courses like Quantum Algorithms & Machine Learning and Quantum Compilers</li>
+                                <li><a href="courses.html" class="course-link">View detailed course list <i class="fas fa-arrow-right"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -109,7 +219,9 @@
                             <h3>Restaurant Employee -- McDonalds</h3>
                             <p class="date">February 2022 -- August 2022</p>
                             <p class="location">Gladsaxe, Denmark</p>
-                            <p>Worked at McDonald's full time after moving to Denmark alone</p>
+                            <ul>
+                                <li> Worked at McDonald's full time after moving to Denmark alone</li>
+                            </ul>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -124,6 +236,17 @@
                                 <li>Developed algorithms for image manipulation and analysis</li>
                                 <li>Participated actively in pitch and strategy meetings</li>
                                 <li>Engaged in pair programming sessions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <img src="images/cfc-logo.png" alt="Cambridge Fencing Center" class="logo">
+                        <div class="timeline-item-content">
+                            <h3>Assistant Coach -- Cambridge Fencing Center</h3>
+                            <p class="date">2017 -- 2019</p>
+                            <p class="location">Cambridge, MA, USA</p>
+                            <ul>
+                                <li>Helped introduce a group of young kids to the sport of fencing</li>
                             </ul>
                         </div>
                     </div>
@@ -156,6 +279,20 @@
             <div class="container">
                 <h2>Extracurriculars</h2>
                 <div class="timeline">
+                    <div class="timeline-item">
+                        <img src="images/dtu-logo.png" alt="DTU" class="logo">
+                        <div class="timeline-item-content">
+                            <h3>DTU Vector(study start tutor) - Study Start</h3>
+                            <p class="date">2024 - 2025</p>
+                            <p>Served as a vector for DTU study start, helping new students transition to university life</p>
+                            <ul>
+                                <li>Arranged orientation activities and events for incoming students</li>
+                                <li>Guided new students through their social and academic integration</li>
+                                <li>Provided ongoing support throughout their first semester</li>
+                                <li>Helped create a welcoming and inclusive environment for a diverse group of students</li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="timeline-item">
                         <div class="timeline-item-content">
                             <h3>Chemistry Olympiad</h3>
@@ -215,6 +352,30 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script>
+        // Mobile menu functionality
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const overlay = document.getElementById('overlay');
+        
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+        
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    </script>
 </body>
 </html>

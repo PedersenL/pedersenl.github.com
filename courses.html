@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leif Pedersen - Course Overview</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .courses-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 20px; /* Further reduced top padding */
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+        
+        .current-courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 15px;
+        }
+        
+        .current-course-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9em;
+        }
+        
+        .current-course-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .current-course-card .course-title {
+            font-size: 1.15em;
+            margin-bottom: 6px;
+        }
+        
+        .current-course-card .course-description {
+            font-size: 0.9em;
+        }
+        
+        .current-course-card .course-semester {
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            color: #0B5394;
+            font-weight: 500;
+        }
+        
+        .course-bullets {
+            margin-top: 6px;
+            padding-left: 18px;
+        }
+        
+        .course-bullets li {
+            margin-bottom: 4px;
+            line-height: 1.25;
+            font-size: 0.9em;
+        }
+        
+        .course-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9em;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .course-number {
+            color: #0B5394;
+            font-weight: bold;
+            font-size: 1em;
+            margin-right: 6px;
+        }
+        
+        .course-title {
+            font-size: 1.1em;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+        
+        .course-title a, .course-number a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .course-title a:hover, .course-number a:hover {
+            color: #0B5394;
+        }
+        
+        .course-description {
+            color: #555;
+            line-height: 1.4;
+            font-size: 0.85em;
+            flex-grow: 1;
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #0B5394;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background-color: #083b6f;
+        }
+
+        .course-semester {
+            font-style: italic;
+            color: #777;
+            margin-bottom: 6px;
+            font-size: 0.8em;
+        }
+        
+        .course-section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            border-bottom: 2px solid #0B5394;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        
+        /* Menu button styles */
+        .menu-button {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1100;
+            background-color: #0B5394;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+        }
+        
+        .menu-button:hover {
+            background-color: #083b6f;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: white;
+            z-index: 1050;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.open {
+            right: 0;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-menu ul li {
+            margin-bottom: 15px;
+        }
+        
+        .mobile-menu ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 8px 0;
+        }
+        
+        .mobile-menu ul li a:hover {
+            color: #0B5394;
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile menu button -->
+    <button class="menu-button" id="menuButton">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#extracurriculars">Extracurriculars</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <main>
+        <section class="courses-container">
+            <h1>DTU Course Overview</h1>
+            <p>Below is a comprehensive list of key courses I have completed and am currently taking at the Technical University of Denmark (DTU).</p>
+            
+            <div class="course-section">
+                <h2 class="section-title">Current Courses</h2>
+                <div class="current-courses-grid">
+                    <div class="current-course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/02195" target="_blank">02195</a></span>
+                            <a href="https://kurser.dtu.dk/course/02195" target="_blank">Quantum Algorithms and Machine Learning</a>
+                        </h2>
+                        <p class="course-semester">Advanced Quantum Computing Course</p>
+                        <ul class="course-bullets">
+                            <li>Implementation of Grover's search algorithm and quantum phase estimation</li>
+                            <li>Study of HHL algorithm for linear systems and machine learning applications</li>
+                            <li>Development of quantum neural networks and support vector machines</li>
+                            <li>Application of quantum dimensionality reduction techniques</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="current-course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/02196" target="_blank">02196</a></span>
+                            <a href="https://kurser.dtu.dk/course/02196" target="_blank">Quantum Compilers</a>
+                        </h2>
+                        <p class="course-semester">Specialized Quantum Computing Course</p>
+                        <ul class="course-bullets">
+                            <li>Quantum circuit optimization for various hardware architectures</li>
+                            <li>Noise mitigation strategies for quantum algorithm performance</li>
+                            <li>Mapping abstract quantum algorithms to physical qubits</li>
+                            <li>Development for NISQ (Noisy Intermediate-Scale Quantum) devices</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="current-course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/34020" target="_blank">34020</a></span>
+                            <a href="https://kurser.dtu.dk/course/34020" target="_blank">Optics and Photonics</a>
+                        </h2>
+                        <p class="course-semester">Advanced Physics Course</p>
+                        <ul class="course-bullets">
+                            <li>Study of electromagnetic waves and optical phenomena</li>
+                            <li>Application of polarization, interference, and diffraction principles</li>
+                            <li>Analysis of optical components and systems</li>
+                            <li>Implementation of photonic devices and technologies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="course-section">
+                <h2 class="section-title">Completed Courses</h2>
+                <div class="courses-grid">
+                    <div class="course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/10112" target="_blank">10112</a></span>
+                            <a href="https://kurser.dtu.dk/course/10112" target="_blank">Advanced Quantum Mechanics</a>
+                        </h2>
+                        <p class="course-semester">Advanced Physics Course</p>
+                        <ul class="course-bullets">
+                            <li>Analyzed quantum states and operators in depth</li>
+                            <li>Applied measurement theory to quantum systems</li>
+                            <li>Developed approximation methods for complex quantum problems</li>
+                        </ul>
+                    </div>
+
+                    <div class="course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/10384" target="_blank">10384</a></span>
+                            <a href="https://kurser.dtu.dk/course/10384" target="_blank">Quantum Information</a>
+                        </h2>
+                        <p class="course-semester">Specialization Course</p>
+                        <ul class="course-bullets">
+                            <li>Studied quantum bits and quantum logic gates</li>
+                            <li>Analyzed quantum algorithms and their computational advantages</li>
+                            <li>Explored quantum communication protocols and quantum cryptography</li>
+                        </ul>
+                    </div>
+
+                    <div class="course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/10036" target="_blank">10036</a></span>
+                            <a href="https://kurser.dtu.dk/course/10036" target="_blank">Electromagnetism for Physicists</a>
+                        </h2>
+                        <p class="course-semester">Physics Core Course</p>
+                        <ul class="course-bullets">
+                            <li>Mastered electric and magnetic field theory</li>
+                            <li>Applied Maxwell's equations to electromagnetic phenomena</li>
+                            <li>Analyzed electromagnetic waves and their properties</li>
+                        </ul>
+                    </div>
+
+                    <div class="course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/10033" target="_blank">10033</a></span>
+                            <a href="https://kurser.dtu.dk/course/10033" target="_blank">Mechanics and Physical Modelling</a>
+                        </h2>
+                        <p class="course-semester">Physics & Engineering Core Course</p>
+                        <ul class="course-bullets">
+                            <li>Applied Newtonian mechanics to engineering problems</li>
+                            <li>Analyzed systems using conservation laws</li>
+                            <li>Solved physical problems with mathematical modeling</li>
+                        </ul>
+                    </div>
+
+                    <div class="course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/10034" target="_blank">10034</a></span>
+                            <a href="https://kurser.dtu.dk/course/10034" target="_blank">Thermodynamics and Statistical Physics</a>
+                        </h2>
+                        <p class="course-semester">Physics & Engineering Core Course</p>
+                        <ul class="course-bullets">
+                            <li>Mastered laws of thermodynamics and entropy concepts</li>
+                            <li>Applied statistical treatment to physical systems</li>
+                            <li>Analyzed equilibrium properties of matter and energy transformations</li>
+                        </ul>
+                    </div>
+
+                    <div class="course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/01037" target="_blank">01037</a></span>
+                            <a href="https://kurser.dtu.dk/course/01037" target="_blank">Advanced Engineering Mathematics 2</a>
+                        </h2>
+                        <p class="course-semester">Mathematics Core Course</p>
+                        <ul class="course-bullets">
+                            <li>Solved complex differential equations applicable to engineering</li>
+                            <li>Applied advanced linear algebra concepts</li>
+                            <li>Utilized numerical methods for complex problem-solving</li>
+                        </ul>
+                    </div>
+
+                    <div class="course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/42620" target="_blank">42620</a></span>
+                            <a href="https://kurser.dtu.dk/course/42620" target="_blank">Science, Technology and Society</a>
+                        </h2>
+                        <p class="course-semester">Polytechnical Foundation Course</p>
+                        <ul class="course-bullets">
+                            <li>Analyzed innovation's impact on society and the environment</li>
+                            <li>Applied sustainability frameworks to engineering projects</li>
+                            <li>Explored responsible research and innovation principles</li>
+                        </ul>
+                    </div>
+
+                    <div class="course-card">
+                        <h2 class="course-title">
+                            <span class="course-number"><a href="https://kurser.dtu.dk/course/10031" target="_blank">10031</a></span>
+                            <a href="https://kurser.dtu.dk/course/10031" target="_blank">Introduction to Engineering Physics</a>
+                        </h2>
+                        <p class="course-semester">Introductory Course</p>
+                        <ul class="course-bullets">
+                            <li>Gained foundation in core physical principles</li>
+                            <li>Developed problem-solving methodologies</li>
+                            <li>Applied physics concepts to engineering challenges</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <a href="index.html#education" class="back-button"><i class="fas fa-arrow-left"></i> Back to Education</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Leif Pedersen. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const overlay = document.getElementById('overlay');
+        
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+        
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html> 
