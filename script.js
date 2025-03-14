@@ -62,4 +62,36 @@ document.addEventListener('DOMContentLoaded', function() {
         const gradientPosition = (scrolled / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
         document.body.style.backgroundPosition = `${gradientPosition}% ${gradientPosition}%`;
     });
-}); 
+});
+
+// Mobile navigation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Create hamburger button
+    const hamburger = document.createElement('button');
+    hamburger.classList.add('hamburger');
+    
+    // Create three spans for the hamburger icon
+    for (let i = 0; i < 3; i++) {
+        const span = document.createElement('span');
+        hamburger.appendChild(span);
+    }
+
+    // Add hamburger button to header
+    const header = document.querySelector('header');
+    header.appendChild(hamburger);
+
+    // Toggle navigation menu when hamburger is clicked
+    hamburger.addEventListener('click', function() {
+        const navMenu = document.querySelector('nav ul');
+        navMenu.classList.toggle('open');
+        document.body.classList.toggle('no-scroll');
+    });
+
+    // Close menu when a nav link is clicked
+    document.querySelectorAll('nav ul li a').forEach(item => {
+        item.addEventListener('click', () => {
+            document.querySelector('nav ul').classList.remove('open');
+            document.body.classList.remove('no-scroll');
+        });
+    });
+});
