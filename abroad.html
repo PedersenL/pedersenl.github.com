@@ -3,17 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leif Pedersen - Personal Website</title>
+    <title>Leif Pedersen - Study Abroad to Korea</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        body {
+            background-color: #f8f7ff;
+        }
+        
+        .abroad-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 20px;
+        }
+        
+        .abroad-container h1 {
+            font-family: 'Poppins', sans-serif;
+            color: #5e60ce;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .abroad-container > p {
+            text-align: center;
+            color: #6c757d;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .content-section {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffebee 0%, #e8f5e9 50%, #e3f2fd 100%);
+            border-radius: 15px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 20px;
+            color: #5e60ce;
+            text-align: center;
+            font-size: 1.8em;
+            padding: 10px;
+            position: relative;
+            display: block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, #5e60ce, #64dfdf, #5e60ce);
+            border-radius: 3px;
+        }
+        
+        .text-content {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            position: relative;
+            border-left: 5px solid #64dfdf;
+            font-family: 'Comic Neue', cursive;
+            font-size: 1.1em;
+        }
+        
+        .text-content p {
+            margin-bottom: 15px;
+            color: #444;
+        }
+        
+        .text-content ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .text-content li {
+            position: relative;
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+        
+        .text-content li::before {
+            content: '✨';
+            position: absolute;
+            left: -5px;
+            color: #5e60ce;
+        }
+        
+        .doodle {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .doodle-1 {
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            transform: rotate(15deg);
+        }
+        
+        .doodle-2 {
+            bottom: 20px;
+            left: 30px;
+            font-size: 2.5em;
+            transform: rotate(-10deg);
+        }
+        
+        .slideshow-container {
+            position: relative;
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 3px solid #64dfdf;
+        }
+        
+        .slideshow-container h3 {
+            font-family: 'Poppins', sans-serif;
+            color: #5e60ce;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .slideshow {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: transparent;
+            perspective: 1000px;
+        }
+        
+        .slides-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .slide {
+            position: absolute;
+            width: 60%;
+            height: 80%;
+            left: 20%;
+            top: 10%;
+            opacity: 0;
+            border-radius: 10px;
+            box-shadow: none;
+            background-color: transparent;
+            transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Comic Neue', cursive;
+            overflow: hidden;
+            transform: scale(0.8);
+            filter: blur(2px);
+        }
+        
+        .slide.prev, .slide.next {
+            opacity: 0.6;
+            z-index: 2;
+            transform: scale(0.9);
+            filter: blur(1px);
+        }
+        
+        .slide.prev {
+            left: 5%;
+            transform-origin: left center;
+        }
+        
+        .slide.next {
+            left: 35%;
+            transform-origin: right center;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            z-index: 3;
+            transform: scale(1);
+            filter: blur(0);
+        }
+        
+        .slide p {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #5e60ce;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 80%;
+        }
+        
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+        }
+        
+        .slide video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+            background-color: transparent;
+        }
+        
+        .media-type-badge {
+            display: none;
+        }
+        
+        .slide .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(94, 96, 206, 0.7);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 4;
+            font-size: 1.5em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .slide.active:hover .play-button {
+            opacity: 1;
+        }
+        
+        .slide-nav {
+            text-align: center;
+            padding: 15px 0 5px;
+            display: none;
+        }
+        
+        .slide-indicators {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background-color: #5e60ce;
+            transform: scale(1.3);
+        }
+        
+        .slide-nav button {
+            background-color: #5e60ce;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9em;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .slide-nav button:hover {
+            background-color: #64dfdf;
+            transform: translateY(-2px);
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 12px 25px;
+            background-color: #5e60ce;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            display: block;
+            width: fit-content;
+        }
+        
+        .back-button:hover {
+            background-color: #64dfdf;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
         /* Menu button styles */
         .menu-button {
             position: fixed;
             top: 15px;
             right: 15px;
             z-index: 1100;
-            background-color: #0B5394;
+            background-color: #5e60ce;
             color: white;
             border: none;
             border-radius: 50%;
@@ -23,12 +355,13 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
         }
         
         .menu-button:hover {
-            background-color: #083b6f;
+            background-color: #64dfdf;
+            transform: rotate(90deg);
         }
         
         .mobile-menu {
@@ -58,16 +391,18 @@
         }
         
         .mobile-menu ul li a {
-            color: #333;
+            color: #5e60ce;
             text-decoration: none;
             font-size: 1.1em;
             transition: color 0.3s ease;
             display: block;
             padding: 8px 0;
+            font-family: 'Poppins', sans-serif;
         }
         
         .mobile-menu ul li a:hover {
-            color: #0B5394;
+            color: #64dfdf;
+            transform: translateX(5px);
         }
         
         .close-menu {
@@ -78,7 +413,7 @@
             border: none;
             font-size: 1.5em;
             cursor: pointer;
-            color: #333;
+            color: #5e60ce;
         }
         
         .overlay {
@@ -99,9 +434,102 @@
             visibility: visible;
         }
         
-        /* Adjust main content padding */
-        #hero {
-            padding-top: 40px;
+        footer {
+            background-color: #5e60ce;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .confetti-container {
+            position: relative;
+            height: 100px;
+            margin-bottom: -50px;
+            overflow: hidden;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #64dfdf;
+            border-radius: 50%;
+            animation: confetti-fall 5s linear infinite;
+        }
+        
+        .confetti:nth-child(2n) {
+            background-color: #5e60ce;
+            width: 15px;
+            height: 15px;
+        }
+        
+        .confetti:nth-child(3n) {
+            background-color: #ffecb3;
+            width: 8px;
+            height: 8px;
+        }
+        
+        .confetti:nth-child(4n) {
+            background-color: #ffb3ba;
+            width: 12px;
+            height: 12px;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Side navigation controls */
+        .side-nav {
+            position: absolute;
+            top: 0;
+            width: 20%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .side-nav:hover {
+            background-color: rgba(94, 96, 206, 0.1);
+        }
+        
+        .side-nav .nav-arrow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(94, 96, 206, 0.7);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .side-nav:hover .nav-arrow {
+            opacity: 0.9;
+            transform: scale(1.1);
+        }
+        
+        .prev-nav {
+            left: 0;
+        }
+        
+        .next-nav {
+            right: 0;
         }
     </style>
 </head>
@@ -117,241 +545,109 @@
             <i class="fas fa-times"></i>
         </button>
         <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#education">Education</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#education">Education</a></li>
             <li><a href="courses.html">Courses</a></li>
-            <li><a href="abroad.html">Study Abroad</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#extracurriculars">Extracurriculars</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="abroad.html">Study Abroad to Korea</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#extracurriculars">Extracurriculars</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
         </ul>
     </div>
     
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 
+    <!-- Confetti animation -->
+    <div class="confetti-container">
+        <div class="confetti" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="confetti" style="left: 20%; animation-delay: 0.5s;"></div>
+        <div class="confetti" style="left: 30%; animation-delay: 1s;"></div>
+        <div class="confetti" style="left: 40%; animation-delay: 1.5s;"></div>
+        <div class="confetti" style="left: 50%; animation-delay: 0.7s;"></div>
+        <div class="confetti" style="left: 60%; animation-delay: 1.2s;"></div>
+        <div class="confetti" style="left: 70%; animation-delay: 0.3s;"></div>
+        <div class="confetti" style="left: 80%; animation-delay: 0.9s;"></div>
+        <div class="confetti" style="left: 90%; animation-delay: 1.7s;"></div>
+    </div>
+
     <main>
-        <section id="hero" class="about">
-            <!-- Add "about" ID to make the navigation link work -->
-            <div id="about" class="container">
-                <div class="profile-section">
-                    <div class="profile-image">
-                        <img src="images/portrait.jpg" alt="Leif Pedersen">
-                    </div>
-                    <div class="profile-info">
-                        <h1>Leif Pedersen</h1>
-                        <p class="tagline">Physics and Engineering Student at DTU</p>
-                    </div>
+        <section class="abroad-container">
+            <h1>Study Abroad to Korea</h1>
+            <p>Help us get going and fund our adventure and education in Korea!</p>
+            
+            <div class="content-section">
+                <h2 class="section-title">Leif & Asger</h2>
+                <div class="text-content">
+                    <div class="doodle doodle-1">🎮</div>
+                    <div class="doodle doodle-2">🚀</div>
+                    
+                    <p>Hey, this is Leif and Asger. We met in our first semester at DTU studying physics and have been best friends ever since. We planned to go to Korea together pretty much since we first met, with both of us being really interested in their culture and high education prospects. I also want to visit because it's where my mother grew up, but I've never gotten the chance to visit Korea despite that.</p>
+                    
+                    <p>Since then, we've done a lot together and tried to learn foundational Korean skills to be ready for our education abroad:</p>
+                    <ul>
+                        <li>We became study start tutors to help out the new physics students at DTU, which was tons of fun and we made lots of good friends</li>
+                        <li>We love to go climbing, running, and to the gym together as much as we can alongside our studies</li>
+                        <li>We've gone on climbing trips to both Sweden and Bornholm with our other climbing friends from physics</li>
+                        <li>Studying for our classes and exams together</li>
+                        <li>Cooking and making yummy food together!</li>
+                    </ul>
+                    
+                    <p>We're hoping we can get some funding for our trip to Korea so we can focus on our education and networking with more people while in Korea instead of having to work on the side or worry about our finances too much.</p>
+                    
+                    <p>Our goals for Korea:</p>
+                    <ul>
+                        <li>Visit lots of important sites in Korea</li>
+                        <li>Learn Korean to a level where we're capable of living there if we wish</li>
+                        <li>See the differences in teaching methods between Korea and Denmark</li>
+                        <li>Go on student trips with the other local students at our universities</li>
+                        <li>Be able to visit one another throughout our stay as we unfortunately weren't able to go to the same university</li>
+                    </ul>
+                    
+                    <p>Below we have an image slideshow with some of the pictures we've taken together or of each other during our trips!</p>
                 </div>
-                <p class="bio">Motivated student looking for more work experience within research and development alongside my studies. I am fluent in English and Danish, and also have learnt Japanese and Spanish in school. I have experience in Python, C++, JS, image processing, and find enjoyment in learning new things.</p>
-            </div>
-        </section>
-
-        <section id="education">
-            <div class="container">
-                <h2>Education</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <img src="images/dtu-logo.png" alt="DTU" class="logo">
-                        <div class="timeline-item-content">
-                            <h3>Physics and Engineering | DTU</h3>
-                            <p class="date">Aug. 2023 -- Ongoing</p>
-                            <p class="location">Lyngby, Denmark</p>
-                            <ul>
-                                <li>Focusing on courses in Quantum Information Sciences and Quantum computers</li>
-                                <li>Solid quantum information foundation from master courses such as Advanced Quantum Mechanics and Quantum Information</li>
-                                <li>Currently working on quantum computers with master courses like Quantum Algorithms & Machine Learning and Quantum Compilers</li>
-                                <li><a href="courses.html" class="course-link">View detailed course list <i class="fas fa-arrow-right"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <img src="images/gengym.jpg" alt="Gentofte Gymnasium" class="logo">
-                        <div class="timeline-item-content">
-                            <h3>STX Education | Gentofte Gymnasium</h3>
-                            <p class="date">Aug. 2022 -- Jun. 2023</p>
-                            <p class="location">Gentofte, Denmark</p>
-                            <p>Completed STX education in Denmark</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <img src="images/bhs-logo.png" alt="Brookline High School" class="logo">
-                        <div class="timeline-item-content">
-                            <h3>High School Degree | Brookline High School</h3>
-                            <p class="date">Aug. 2017 -- May 2021</p>
-                            <p class="location">Brookline, MA, USA</p>
-                            <p>High School degree with 5 college level courses (AP classes)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience">
-            <div class="container">
-                <h2>Work Experience</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <img src="images/compute.jpg" alt="DTU Compute" class="logo">
-                        <div class="timeline-item-content">
-                            <h3>Class Teacher -- DTU Compute</h3>
-                            <p class="date">2024 -- Ongoing</p>
-                            <p class="location">Kongens Lyngby, Denmark</p>
-                            <ul>
-                                <li>Ran a class as the programming class teacher for the Sustainable Energy Design major</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <img src="images/fysik.jpg" alt="DTU Fysik" class="logo">
-                        <div class="timeline-item-content">
-                            <h3>Teacher Assistant -- DTU Fysik & DTU Compute</h3>
-                            <p class="date">2024 -- Ongoing</p>
-                            <p class="location">Kongens Lyngby, Denmark</p>
-                            <ul>
-                                <li>Teacher assistant in Math1a, Math1b, and Fysiks 1</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <img src="images/mcdonalds-logo.png" alt="McDonald's" class="logo mcdonalds">
-                        <div class="timeline-item-content">
-                            <h3>Restaurant Employee -- McDonalds</h3>
-                            <p class="date">February 2022 -- August 2022</p>
-                            <p class="location">Gladsaxe, Denmark</p>
-                            <ul>
-                                <li> Worked at McDonald's full time after moving to Denmark alone</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <img src="images/solo-sciences-logo.png" alt="Solo Sciences Inc." class="logo">
-                        <div class="timeline-item-content">
-                            <h3>Visual Software Engineer -- Solo Sciences Inc.</h3>
-                            <p class="date">May 2019 -- August 2019</p>
-                            <p class="location">Boston, MA, USA</p>
-                            <ul>
-                                <li>Summer internship at a startup, mainly worked on the app to read encoded images</li>
-                                <li>Worked with image processing in C++ using OpenCV2</li>
-                                <li>Developed algorithms for image manipulation and analysis</li>
-                                <li>Participated actively in pitch and strategy meetings</li>
-                                <li>Engaged in pair programming sessions</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <img src="images/cfc-logo.png" alt="Cambridge Fencing Center" class="logo">
-                        <div class="timeline-item-content">
-                            <h3>Assistant Coach -- Cambridge Fencing Center</h3>
-                            <p class="date">2017 -- 2019</p>
-                            <p class="location">Cambridge, MA, USA</p>
-                            <ul>
-                                <li>Helped introduce a group of young kids to the sport of fencing</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects">
-            <div class="container">
-                <h2>Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <img src="images/Opticsim.jpg" alt="Optical Simulator" onerror="this.src='https://via.placeholder.com/400x200?text=Optical+Simulator'">
-                        <h3>Optical Simulator</h3>
-                        <p class="date">2024</p>
-                        <p>Python simulator to study and optimize efficiency of different optical structures for single photon sources which are vital for quantum information. Simulation featured both taper, flat-top, and Anti-reflective while also account for a butt-coupling optical fiber and it's coupling-efficiency.</p>
-                        <!-- Removed the external simulator link -->
-                    </div>
-                    <div class="project-card">
-                        <img src="images/Fencingscoringbox.jpg" alt="Fencing Box Project">
-                        <h3>Fencing Scoring Box with Replay Technology</h3>
-                        <p class="date">Spring 2021</p>
-                        <p>Homemade fencing scoring box, with replay and timing capabilities on a raspberry pi</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="extracurriculars">
-            <div class="container">
-                <h2>Extracurriculars</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <img src="images/dtu-logo.png" alt="DTU" class="logo">
-                        <div class="timeline-item-content">
-                            <h3>DTU Vector(study start tutor) - Study Start</h3>
-                            <p class="date">2024 - 2025</p>
-                            <p>Served as a vector for DTU study start, helping new students transition to university life</p>
-                            <ul>
-                                <li>Arranged orientation activities and events for incoming students</li>
-                                <li>Guided new students through their social and academic integration</li>
-                                <li>Provided ongoing support throughout their first semester</li>
-                                <li>Helped create a welcoming and inclusive environment for a diverse group of students</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <h3>Chemistry Olympiad</h3>
-                            <p class="date">October 2022 - May 2023</p>
-                            <p>Participated and made it to the final round of the danish chemistry olympiad</p>
-                        </div>
-                        <img src="images/KemiOL.jpg" alt="Chemistry Olympiad" class="KemiOL">
-                    </div>
-                    <div class="timeline-item">
-                        <img src="images/42-logo.png" alt="42" class="logo">
-                        <div class="timeline-item-content">
-                            <h3>Python Piscine | 42 (Computer Programming School)</h3>
-                            <p class="date">May 2022</p>
-                            <p>Intense, one month course in python including admission test to the school in which I passed</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <img src="images/warriors.jpg" alt="Track and Field" class="logo">
-                        <div class="timeline-item-content">
-                            <h3>Track and Field</h3>
-                            <p class="date">Spring 2021</p>
-                            <p>Joined varsity recieving "Rookie of the Year" in my first year of track and field for my high school</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-item-content">
-                            <h3>Fencing</h3>
-                            <p class="date">2012 - 2023</p>
-                            <p>Fenced saber for many years despite through an re-occuring injury I received when I was a child</p>
-                            <ul>
-                                <li>Won the Junior Nordic Fencing Championships for Denmark in 2022</li>
-                            </ul>
-                            <div class="subsection">
-                                <h4>BHS Men's Saber Fencing Team Captain</h4>
-                                <p class="date">2018 - 2019</p>
-                                <ul>
-                                    <li>Won the Massachusetts State Championship in our category as captain of the High School fencing team</li>
-                                    <li>Won saber team states</li>
-                                </ul>
+                
+                <!-- Slideshow -->
+                <div class="slideshow-container">
+                    <h3>Memory Lane</h3>
+                    <div class="slideshow" id="slideshow1">
+                        <!-- Side navigation controls -->
+                        <div class="side-nav prev-nav" id="sideNavPrev1">
+                            <div class="nav-arrow">
+                                <i class="fas fa-chevron-left"></i>
                             </div>
                         </div>
-                        <img src="images/fencing.png" alt="Nordic Championships" class="achievement">
+                        <div class="side-nav next-nav" id="sideNavNext1">
+                            <div class="nav-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="slides-wrapper">
+                            <div class="slide active">
+                                <p>Add images or videos to the "asger-leif pics" folder to see them here! <br>📷 🎬 ✨</p>
+                            </div>
+                            <!-- Additional slides will be added via JavaScript -->
+                        </div>
+                    </div>
+                    <div class="slide-indicators" id="indicators1"></div>
+                    <div class="slide-nav">
+                        <button id="prev1">Previous</button>
+                        <button id="next1">Next</button>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section id="contact">
-            <div class="container">
-                <h2>Contact</h2>
-                <div class="contact-info">
-                    <p><i class="fas fa-phone"></i> +45 51 14 14 70</p>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:kimpedersen@gmail.com">kimpedersen@gmail.com</a></p>
-                    <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/leif-pedersen-598104231/" target="_blank">LinkedIn Profile</a></p>
-                </div>
-            </div>
+            <a href="index.html#education" class="back-button"><i class="fas fa-arrow-left"></i> Back to Main Page</a>
         </section>
     </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Leif Pedersen</p>
+        </div>
+    </footer>
 
     <script>
         // Mobile menu functionality
@@ -376,6 +672,289 @@
             mobileMenu.classList.remove('open');
             overlay.classList.remove('open');
             document.body.style.overflow = '';
+        });
+        
+        // Slideshow functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Local images with relative paths - fixing the paths to ensure they work properly
+            const sampleMedia = [
+                // We'll use direct images that should work reliably in a browser
+                { name: './asger-leif pics/image.jpg', type: 'image', alt: 'Friendship memory 1' },
+                { name: './asger-leif pics/received_792226416269674.jpg', type: 'image', alt: 'Friendship memory 2' },
+                { name: './asger-leif pics/received_954917649407622.jpg', type: 'image', alt: 'Friendship memory 3' },
+                { name: './asger-leif pics/received_356365800766996.jpg', type: 'image', alt: 'Friendship memory 4' },
+                { name: './asger-leif pics/received_1143563380310138.jpg', type: 'image', alt: 'Friendship memory 5' },
+                { name: './asger-leif pics/received_3312524335715168.jpg', type: 'image', alt: 'Friendship memory 6' },
+                { name: './asger-leif pics/Snapchat-1107179079.jpg', type: 'image', alt: 'Friendship memory 7' },
+                { name: './asger-leif pics/IMG_20240531_184408.jpg', type: 'image', alt: 'Friendship memory 8' },
+                { name: './asger-leif pics/received_308334352329332.jpg', type: 'image', alt: 'Friendship memory 9' },
+                { name: './asger-leif pics/received_463473146172796.jpg', type: 'image', alt: 'Friendship memory 10' },
+                { name: './asger-leif pics/received_943138927564614.jpg', type: 'image', alt: 'Friendship memory 11' },
+                { name: './asger-leif pics/received_4185445410209412.jpg', type: 'image', alt: 'Friendship memory 12' },
+                { name: './asger-leif pics/received_1017365066443721.jpg', type: 'image', alt: 'Friendship memory 13' },
+                { name: './asger-leif pics/received_1639526800236519.jpg', type: 'image', alt: 'Friendship memory 14' },
+                { name: './asger-leif pics/received_418544541020941.jpg', type: 'image', alt: 'Friendship memory 15' },
+                { name: './asger-leif pics/454039749_447769258259913_4426008389235232354_n.jpg', type: 'image', alt: 'Friendship memory 16' },
+                { name: './asger-leif pics/438203834_284047334760672_7502138747314099690_n.jpg', type: 'image', alt: 'Friendship memory 17' },
+                { name: './asger-leif pics/441895021_706587911520117_2956949515806398333_n.jpg', type: 'image', alt: 'Friendship memory 18' },
+                { name: './asger-leif pics/447421600_25952424251038016_4162544481181860016_n.mp4', type: 'video', alt: 'Video memory 1' },
+                { name: './asger-leif pics/434637230_306340145632242_8051407992096838136_n.jpg', type: 'image', alt: 'Friendship memory 19' },
+                { name: './asger-leif pics/435136218_344706298612031_6315309374005591432_n.jpg', type: 'image', alt: 'Friendship memory 21' },
+                { name: './asger-leif pics/441235670_1162570694878811_7736326480475417172_n.jpg', type: 'image', alt: 'Friendship memory 22' },
+                { name: './asger-leif pics/462559903_2710683169133991_1854264752130749196_n.jpg', type: 'image', alt: 'Friendship memory 23' }
+            ];
+            
+            // Debug info - log which images are being loaded
+            console.log("Attempting to load " + sampleMedia.length + " media files");
+            
+            // If no images load, use placeholders
+            let imagesToShow = [...sampleMedia];
+            
+            // Setup slideshow
+            setupSlideshow('slideshow1', 'prev1', 'next1', 'indicators1', 'sideNavPrev1', 'sideNavNext1', imagesToShow);
+            
+            // This function sets up a slideshow with navigation
+            function setupSlideshow(slideshowId, prevId, nextId, indicatorsId, sidePrevId, sideNextId, media) {
+                const slideshow = document.getElementById(slideshowId);
+                const slidesWrapper = slideshow.querySelector('.slides-wrapper');
+                const prevButton = document.getElementById(prevId);
+                const nextButton = document.getElementById(nextId);
+                const sidePrevButton = document.getElementById(sidePrevId);
+                const sideNextButton = document.getElementById(sideNextId);
+                const indicators = document.getElementById(indicatorsId);
+                let currentSlide = 0;
+                
+                // Clear any existing slides 
+                slidesWrapper.innerHTML = '';
+                
+                // Clear indicators
+                indicators.innerHTML = '';
+                
+                // Create slides
+                for (let i = 0; i < media.length; i++) {
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    
+                    if (media[i].isPlaceholder) {
+                        // For placeholders
+                        const message = document.createElement('p');
+                        message.textContent = `Add ${media[i].type}s to the "asger-leif pics" folder to see them here! ${media[i].type === 'image' ? '📷' : '🎬'} ✨`;
+                        slide.appendChild(message);
+                    } else {
+                        // For real media files
+                        if (media[i].type === 'image') {
+                            const img = document.createElement('img');
+                            img.src = media[i].name;
+                            img.alt = media[i].alt || 'Friendship memory';
+                            
+                            // Debug info - log when image loads or fails
+                            img.onload = function() {
+                                console.log(`Image loaded successfully: ${media[i].name}`);
+                            };
+                            
+                            // Enhanced error handler for missing images with more visible error
+                            img.onerror = function() {
+                                console.error(`Failed to load image: ${media[i].name}`);
+                                this.onerror = null; // Prevent infinite loop
+                                this.src = ''; // Clear src
+                                
+                                // Create a more visible error message
+                                const errorMsg = document.createElement('div');
+                                errorMsg.innerHTML = `
+                                    <p style="color: #5e60ce; padding: 10px; background-color: rgba(255,255,255,0.8); border-radius: 8px;">
+                                        <i class="fas fa-exclamation-triangle"></i> 
+                                        Image not found: ${media[i].name.split('/').pop()}
+                                    </p>
+                                `;
+                                this.parentNode.appendChild(errorMsg);
+                                this.style.display = 'none';
+                            };
+                            
+                            slide.appendChild(img);
+                        } else if (media[i].type === 'video') {
+                            const video = document.createElement('video');
+                            video.src = media[i].name;
+                            video.controls = true;
+                            video.preload = "metadata";
+                            video.muted = false;
+                            video.style.width = "100%";
+                            
+                            // Debug info - log when video loads or fails
+                            video.onloadeddata = function() {
+                                console.log(`Video loaded successfully: ${media[i].name}`);
+                            };
+                            
+                            // Enhanced error handler for missing videos
+                            video.onerror = function() {
+                                console.error(`Failed to load video: ${media[i].name}`);
+                                this.onerror = null;
+                                this.src = '';
+                                
+                                // Create a more visible error message
+                                const errorMsg = document.createElement('div');
+                                errorMsg.innerHTML = `
+                                    <p style="color: #5e60ce; padding: 10px; background-color: rgba(255,255,255,0.8); border-radius: 8px;">
+                                        <i class="fas fa-exclamation-triangle"></i> 
+                                        Video not found: ${media[i].name.split('/').pop()}
+                                    </p>
+                                `;
+                                this.parentNode.appendChild(errorMsg);
+                                this.style.display = 'none';
+                            };
+                            
+                            slide.appendChild(video);
+                            
+                            // Add play button
+                            const playButton = document.createElement('div');
+                            playButton.className = 'play-button';
+                            playButton.innerHTML = '<i class="fas fa-play"></i>';
+                            slide.appendChild(playButton);
+                            
+                            playButton.addEventListener('click', function(e) {
+                                e.stopPropagation(); // Prevent slide change when clicking play
+                                const video = this.parentNode.querySelector('video');
+                                if (video) {
+                                    if (video.paused) {
+                                        // Pause all other videos first
+                                        document.querySelectorAll('.slideshow video').forEach(v => {
+                                            if (v !== video) v.pause();
+                                        });
+                                        video.play();
+                                        this.innerHTML = '<i class="fas fa-pause"></i>';
+                                    } else {
+                                        video.pause();
+                                        this.innerHTML = '<i class="fas fa-play"></i>';
+                                    }
+                                }
+                            });
+                        }
+                    }
+                    
+                    slidesWrapper.appendChild(slide);
+                    
+                    // Create indicators
+                    const indicator = document.createElement('div');
+                    indicator.className = 'indicator';
+                    indicator.dataset.index = i;
+                    indicators.appendChild(indicator);
+                    
+                    // Add click event to indicators
+                    indicator.addEventListener('click', function() {
+                        goToSlide(parseInt(this.dataset.index));
+                    });
+                }
+                
+                // Get all slides and indicators after creation
+                const slides = slidesWrapper.getElementsByClassName('slide');
+                const indicatorDots = indicators.getElementsByClassName('indicator');
+                
+                // Function to update slides - now slides is defined before this function
+                function updateSlides(index) {
+                    // Pause all videos when changing slides
+                    document.querySelectorAll('.slideshow video').forEach(video => {
+                        video.pause();
+                    });
+                    
+                    // Reset all play buttons
+                    document.querySelectorAll('.play-button').forEach(button => {
+                        button.innerHTML = '<i class="fas fa-play"></i>';
+                    });
+                    
+                    // Update slide classes
+                    for (let i = 0; i < slides.length; i++) {
+                        slides[i].classList.remove('active', 'prev', 'next');
+                    }
+                    
+                    const prevIndex = (index - 1 + slides.length) % slides.length;
+                    const nextIndex = (index + 1) % slides.length;
+                    
+                    slides[index].classList.add('active');
+                    slides[prevIndex].classList.add('prev');
+                    slides[nextIndex].classList.add('next');
+                    
+                    // Update indicators
+                    for (let i = 0; i < indicatorDots.length; i++) {
+                        indicatorDots[i].classList.toggle('active', i === index);
+                    }
+                    
+                    currentSlide = index;
+                }
+                
+                // Function to go to a specific slide
+                function goToSlide(n) {
+                    updateSlides(n);
+                }
+                
+                // If we have slides, make the first one active
+                if (slides.length > 0) {
+                    updateSlides(0);
+                }
+                
+                // Navigation button functionality
+                prevButton.addEventListener('click', function() {
+                    const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+                    goToSlide(prevIndex);
+                });
+                
+                nextButton.addEventListener('click', function() {
+                    const nextIndex = (currentSlide + 1) % slides.length;
+                    goToSlide(nextIndex);
+                });
+                
+                // Side navigation functionality
+                sidePrevButton.addEventListener('click', function() {
+                    const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+                    goToSlide(prevIndex);
+                });
+                
+                sideNextButton.addEventListener('click', function() {
+                    const nextIndex = (currentSlide + 1) % slides.length;
+                    goToSlide(nextIndex);
+                });
+                
+                // Automatic scrolling
+                let slideInterval = setInterval(function() {
+                    // Only auto-advance if no videos are playing
+                    const activeVideos = slideshow.querySelectorAll('video').length > 0 ? 
+                        Array.from(slideshow.querySelectorAll('video')).some(v => !v.paused) : false;
+                    
+                    if (!activeVideos) {
+                        const nextIndex = (currentSlide + 1) % slides.length;
+                        goToSlide(nextIndex);
+                    }
+                }, 5000); // Change slide every 5 seconds
+                
+                // Pause slideshow on hover
+                slideshow.addEventListener('mouseenter', function() {
+                    clearInterval(slideInterval);
+                });
+                
+                slideshow.addEventListener('mouseleave', function() {
+                    // Restart the interval when mouse leaves
+                    clearInterval(slideInterval);
+                    slideInterval = setInterval(function() {
+                        // Only auto-advance if no videos are playing
+                        const activeVideos = slideshow.querySelectorAll('video').length > 0 ? 
+                            Array.from(slideshow.querySelectorAll('video')).some(v => !v.paused) : false;
+                        
+                        if (!activeVideos) {
+                            const nextIndex = (currentSlide + 1) % slides.length;
+                            goToSlide(nextIndex);
+                        }
+                    }, 5000);
+                });
+                
+                // Add keyboard navigation
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'ArrowLeft') {
+                        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+                        goToSlide(prevIndex);
+                    } else if (e.key === 'ArrowRight') {
+                        const nextIndex = (currentSlide + 1) % slides.length;
+                        goToSlide(nextIndex);
+                    }
+                });
+            }
         });
     </script>
 </body>
