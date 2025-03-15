@@ -531,6 +531,50 @@
         .next-nav {
             right: 0;
         }
+        
+        /* PDF Documents Section Styles */
+        .pdf-section {
+            margin-top: 40px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .pdf-links-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .pdf-link {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #5e60ce;
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #444;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            min-width: 200px;
+        }
+        
+        .pdf-link i {
+            color: #5e60ce;
+            margin-right: 10px;
+            font-size: 1.1em;
+        }
+        
+        .pdf-link:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
     </style>
 </head>
 <body>
@@ -640,14 +684,31 @@
             </div>
 
             <a href="index.html#education" class="back-button"><i class="fas fa-arrow-left"></i> Back to Main Page</a>
+            
+            <!-- PDF Documents Section -->
+            <div class="pdf-section">
+                <h2 class="section-title">Leif's Files for Studying Abroad</h2>
+                <div class="pdf-links-container">
+                    <a href="pdfs/Recomendation_Letter.pdf" class="pdf-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Recommendation Letter
+                    </a>
+                    <a href="pdfs/CV_Leif_Pedersen.pdf" class="pdf-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i> CV
+                    </a>
+                    <a href="pdfs/Resultater_Leif_Pedersen_2025-03-15.pdf" class="pdf-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Academic Results
+                    </a>
+                    <a href="pdfs/Korea_Budget.pdf" class="pdf-link" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Korea Study Budget
+                    </a>
+                    <p>Note: You can explore the rest of the website through the menu in the top right corner to find out more about me!</p>
+
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Leif Pedersen</p>
-        </div>
-    </footer>
+
 
     <script>
         // Mobile menu functionality
