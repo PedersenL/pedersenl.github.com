@@ -79,6 +79,7 @@
             font-size: 1.5em;
             cursor: pointer;
             color: #333;
+            z-index: 1200; /* Increased z-index to be higher than menu button */
         }
         
         .overlay {
@@ -133,7 +134,6 @@
 
     <main>
         <section id="hero" class="about">
-            <!-- Add "about" ID to make the navigation link work -->
             <div id="about" class="container">
                 <div class="profile-section">
                     <div class="profile-image">
@@ -142,9 +142,9 @@
                     <div class="profile-info">
                         <h1>Leif Pedersen</h1>
                         <p class="tagline">Physics and Engineering Student at DTU</p>
+                        <p class="bio">Motivated student looking for more work experience within research and development alongside my studies. I am fluent in English and Danish, and also have learnt Japanese and Spanish in school. I have experience in Python, C++, JS, image processing, and find enjoyment in learning new things.</p>
                     </div>
                 </div>
-                <p class="bio">Motivated student looking for more work experience within research and development alongside my studies. I am fluent in English and Danish, and also have learnt Japanese and Spanish in school. I have experience in Python, C++, JS, image processing, and find enjoyment in learning new things.</p>
             </div>
         </section>
 
@@ -363,18 +363,21 @@
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.add('open');
             overlay.classList.add('open');
+            menuButton.style.display = 'none'; // Hide the menu button completely
             document.body.style.overflow = 'hidden';
         });
         
         closeMenu.addEventListener('click', () => {
             mobileMenu.classList.remove('open');
             overlay.classList.remove('open');
+            menuButton.style.display = 'flex'; // Show the menu button again
             document.body.style.overflow = '';
         });
         
         overlay.addEventListener('click', () => {
             mobileMenu.classList.remove('open');
             overlay.classList.remove('open');
+            menuButton.style.display = 'flex'; // Show the menu button again
             document.body.style.overflow = '';
         });
     </script>

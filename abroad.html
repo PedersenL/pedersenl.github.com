@@ -709,7 +709,6 @@
     </main>
 
 
-
     <script>
         // Mobile menu functionality
         const menuButton = document.getElementById('menuButton');
@@ -720,18 +719,21 @@
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.add('open');
             overlay.classList.add('open');
+            menuButton.style.display = 'none'; // Hide the menu button completely
             document.body.style.overflow = 'hidden';
         });
         
         closeMenu.addEventListener('click', () => {
             mobileMenu.classList.remove('open');
             overlay.classList.remove('open');
+            menuButton.style.display = 'flex'; // Show the menu button again
             document.body.style.overflow = '';
         });
         
         overlay.addEventListener('click', () => {
             mobileMenu.classList.remove('open');
             overlay.classList.remove('open');
+            menuButton.style.display = 'flex'; // Show the menu button again
             document.body.style.overflow = '';
         });
         
